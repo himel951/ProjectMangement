@@ -1,0 +1,74 @@
+﻿@model ProjectManagementWebApp.Models.UserInfoDesignationViewModel
+@{
+    ViewBag.Title = "Update";
+}
+@section Style
+{
+    <link href="~/Content/product-section-style.css" rel="stylesheet" />
+}
+<div>
+    @using (Html.BeginForm(null, null, FormMethod.Post, new { @class = "product-content block-center" }))
+    {
+        <h4 class="text-center">Update  Product</h4>
+        if (ViewBag.Message != null)
+        {
+            <p class="text-danger">@ViewBag.Message</p>
+        }
+        @Html.HiddenFor(m => m.Id, new { @value = Model.Id })
+        <div class="form-group-sm">
+            @Html.LabelFor(m => m.Name)
+            @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group-sm">
+            @Html.LabelFor(m => m.Email)
+            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @readonly = "readonly"})
+            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+        </div>
+
+
+        <div class="form-group-sm">
+            @Html.LabelFor(m => m.Password)
+            @Html.TextBoxFor(m => m.Password, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.DesignationId)
+            @Html.DropDownListFor(m => m.DesignationId, new SelectList(ViewBag.Designation, "Value", "Text",Model.DesignationId), new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.DesignationId, "", new { @class = "text-danger" })
+        </div>
+     
+
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.IsActive)
+            @Html.DropDownListFor(m => m.IsActive, new SelectList(ViewBag.IsActives,"Value","Text",Model.IsActive), new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.IsActive, "", new { @class = "text-danger" })
+        </div>          
+     
+        <div>
+            &nbsp;
+        </div>
+        <div class="form-group-sm">
+
+            <input type="submit" value="Update" class="btn btn-danger pull-right" />
+            &nbsp;
+            @Html.ActionLink("Back to List", "EditView", null, new { @class = "btn btn-info pull-right" })
+
+
+        </div>
+
+
+    }
+
+
+    @section scripts
+    {
+        @Scripts.Render("~/bundles/jqueryval");
+    }
+
+
+</div>

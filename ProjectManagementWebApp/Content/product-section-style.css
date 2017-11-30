@@ -1,0 +1,40 @@
+﻿
+
+.block-center {
+    margin: 0 auto;
+    width: 600px;
+    height: 100vh;
+}
+
+
+.product-content {
+    background-color: #fff;
+    border-top: 4px #e7eaec solid;
+    padding: 15px;
+}
+
+/*Product Update Delete Page*/
+
+
+.block-center-sm {
+    margin: 0 auto;
+    width: 1000px;
+}
+
+.padding-custom {
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+#content {
+    margin: 10px 10px 50px 10px;
+    background-color: #fff;
+    border-top: 4px #e7eaec solid;
+}
+
+
+.content-inner {
+    padding: 20px;
+}
+
+

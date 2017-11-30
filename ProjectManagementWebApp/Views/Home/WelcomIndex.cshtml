@@ -1,0 +1,7 @@
+﻿@using ProjectManagementWebApp.Models;
+@{
+    ViewBag.Title = "WelcomIndex";
+    List<UserInfoViewModel> userInfoList = (List<UserInfoViewModel>)Session["UserSession"];
+}
+
+<h2 class="text-center">Welcome To Project Management System</h2>

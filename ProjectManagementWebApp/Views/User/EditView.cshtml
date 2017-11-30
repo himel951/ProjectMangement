@@ -1,0 +1,76 @@
+﻿
+@using ProjectManagementWebApp.Models
+       
+@model IEnumerable<UserInfoDesignationViewModel>
+@{
+    ViewBag.Title = "UpdateDelete";
+}
+
+@section Style
+{
+    <link href="~/Content/product-section-style.css" rel="stylesheet" />
+    <link href="//cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" rel="stylesheet" />
+}
+
+<div id="content">
+    <div class="content-inner">
+        <table id="myTable" class="table table-hover">
+            <thead>
+            <tr>
+                
+                <th>Name</th>
+                <th>Email</th>
+                <th>Password</th>
+                <th>IsActive</th>
+                <th>Designation</th>                
+            </tr>
+            </thead>
+            <tbody id="tbodyId">
+            @foreach (UserInfoDesignationViewModel userInfoDesignationViewModel in Model)
+            {
+
+                <tr>
+                    <td>@userInfoDesignationViewModel.Name</td>
+                    <td>@userInfoDesignationViewModel.Email</td>
+                    <td>@userInfoDesignationViewModel.Password</td>
+                    <td>@if (userInfoDesignationViewModel.IsActive == 0)
+                        {
+                            <span>Inactive</span>
+                        }
+                        else
+                        {
+                            <span>Active</span>
+                        }
+                    </td>
+                    <td>@userInfoDesignationViewModel.Designation</td>
+                    
+                        
+                    <td> <span class="label label-success">@Html.ActionLink("Edit", "Update", new { Id  = userInfoDesignationViewModel.Id})</span> </td>
+                </tr>
+
+            }
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+
+
+@section scripts
+{
+
+    @Scripts.Render("~/bundles/jqueryval");
+
+    <script src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"> </script>
+    <script>
+        $(document).ready(function () {
+
+            $('#myTable').DataTable();
+        });
+    </script>
+
+
+}

@@ -1,0 +1,128 @@
+﻿@using ProjectManagementWebApp.Models;
+@{
+    ViewBag.Title = "WelcomIndex";
+    List<UserInfoViewModel> userInfoList = (List<UserInfoViewModel>)Session["UserSession"];
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Admin Panel</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/default.css" rel="stylesheet" />
+    @RenderSection("Style", required: false)
+</head>
+<body>
+    <div class="container-fluid display-table">
+        <div class="row display-table-row">
+
+
+            <!-- Side Menu Start-->
+            <div class="col-md-2 col-sm-1 hidden-xs display-table-cell valign-top" id="side-menu">
+                <h1 class="hidden-xs hidden-sm">Navigation</h1>
+                <ul>
+                    <li class="link active">
+                        <a href="#">
+                            <span class="glyphicon glyphicon-th" aria-hidden="true"></span>
+                            <span class="hidden-sm hidden-xs">Dashboard</span>
+                        </a>
+                    </li>
+
+                    <li class="link">
+                        <a href="#collapse-product" data-toggle="collapse" aria-controls="collapse-product">
+                            <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+                            <span class="hidden-sm hidden-xs">Project Management Module</span>
+                            @* <span class="label label-success pull-right hidden-sm hidden-xs" aria-hidden="true">10</span>*@
+                        </a>
+
+                        <ul class="collapse collapsible" id="collapse-product">
+                            @foreach (UserInfoViewModel userInfoViewModel in userInfoList)
+                            {
+                                <li>
+                                    <a href="@userInfoViewModel.MenuPath">@userInfoViewModel.MenuCaption</a>                                   
+                                </li>
+                            }
+
+                            @*<li>
+                                <a href="">New Product</a>
+                                @Html.ActionLink("New Product", "Index", "Product")
+                            </li>*@
+                   
+                        </ul>
+                    </li>
+             
+
+
+                   
+                </ul>
+            </div>
+            <!-- Side Menu End-->
+            <!--Menu Content Start-->
+            <div class="col-md-10 col-sm-11 display-table-cell valign-top">
+
+                <!--Header Start-->
+                <div class="row">
+                    <header id="nav-header" class="clearfix">
+                        <div class="col-md-5">
+                            <nav class="navbar-default">
+                                <button type="button" class="navbar-toggle collapsed pull-left" data-toggle="offcanvas" data-target="#side-menu" aria-expanded="false">
+                                    <span class="sr-only">Toggle navigation</span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                </button>
+                            </nav>
+                            <input type="text" class="hidden-sm hidden-xs" id="header-search-field" placeholder="" />
+                        </div>
+                        <div class="col-md-7">
+                            <ul class="pull-right">                         
+                                <li>
+                                    <a href="#" class="logout">
+                                        <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
+                                        Log Out
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </header>
+                </div>
+                <!--Header End-->
+                <!--Inner Content Start-->
+                <div class="row">
+                    @RenderBody()
+
+                </div>
+
+                <!--Inner Content End-->
+                <!--Footer Start-->
+                <div class="row">
+                    <footer id="admin-footer" class="clearfix">
+                        <div class="pull-left">
+                            <b>Copy right &nbsp;</b>&copy; 2017
+                        </div>
+                        <div class="pull-right">
+                            Admin System
+                        </div>
+                    </footer>
+                </div>
+                <!--Footer End-->
+            </div>
+            <!-- Menu Content End-->
+        </div>
+    </div>
+
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    <script src="~/Scripts/default.js"></script>
+    @RenderSection("scripts", required: false)
+
+
+    @*<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>*@
+    
+
+</body>
+</html>
