@@ -142,6 +142,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\UnderConstructionController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Gateway\BaseGateway.cs" />
     <Compile Include="Gateway\DesignationGateway.cs" />
@@ -199,6 +200,7 @@
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\User\EditView.cshtml" />
     <Content Include="Views\User\Update.cshtml" />
+    <Content Include="Views\UnderConstruction\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
