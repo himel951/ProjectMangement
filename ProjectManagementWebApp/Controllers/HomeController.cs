@@ -47,8 +47,6 @@ namespace ProjectManagementWebApp.Controllers
                 {
                     ViewBag.Message = "Username or Password Isn't Correct";
                 }
-
-
             }
             return View();
         }

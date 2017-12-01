@@ -55,5 +55,11 @@ namespace ProjectManagementWebApp.Manager
             int rowAffect = _userInfoGateway.Update(userInfo);
             return rowAffect > 0 ? "Update Successfull" : "Update Failed";
         }
+
+        public string PasswordReset(int id)
+        {
+            int rowAffect = _userInfoGateway.PasswordReset(id);
+            return rowAffect >0 ? "Reset Successfull" : "Reset Failed";
+        }
     }
 }

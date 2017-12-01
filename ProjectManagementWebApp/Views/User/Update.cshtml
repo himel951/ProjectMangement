@@ -23,32 +23,33 @@
 
         <div class="form-group-sm">
             @Html.LabelFor(m => m.Email)
-            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @readonly = "readonly"})
+            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @readonly = "readonly" })
             @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
         </div>
 
 
         <div class="form-group-sm">
             @Html.LabelFor(m => m.Password)
-            @Html.TextBoxFor(m => m.Password, new { @class = "form-control" })
+            @*@Html.TextBoxFor(m => m.Password, new { @class = "form-control" })*@
+            <input id="Password" name="Password" class="btn btn-info form-control" type="button" value="Reset as Default" />
             @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
 
         </div>
 
         <div class="form-group">
             @Html.LabelFor(m => m.DesignationId)
-            @Html.DropDownListFor(m => m.DesignationId, new SelectList(ViewBag.Designation, "Value", "Text",Model.DesignationId), new { @class = "form-control" })
+            @Html.DropDownListFor(m => m.DesignationId, new SelectList(ViewBag.Designation, "Value", "Text", Model.DesignationId), new { @class = "form-control" })
             @Html.ValidationMessageFor(m => m.DesignationId, "", new { @class = "text-danger" })
         </div>
-     
+
 
 
         <div class="form-group">
             @Html.LabelFor(m => m.IsActive)
-            @Html.DropDownListFor(m => m.IsActive, new SelectList(ViewBag.IsActives,"Value","Text",Model.IsActive), new { @class = "form-control" })
+            @Html.DropDownListFor(m => m.IsActive, new SelectList(ViewBag.IsActives, "Value", "Text", Model.IsActive), new { @class = "form-control" })
             @Html.ValidationMessageFor(m => m.IsActive, "", new { @class = "text-danger" })
-        </div>          
-     
+        </div>
+
         <div>
             &nbsp;
         </div>
@@ -57,17 +58,51 @@
             <input type="submit" value="Update" class="btn btn-danger pull-right" />
             &nbsp;
             @Html.ActionLink("Back to List", "EditView", null, new { @class = "btn btn-info pull-right" })
-
-
         </div>
-
-
     }
 
 
     @section scripts
     {
         @Scripts.Render("~/bundles/jqueryval");
+
+
+        <script>
+            $(document).ready(function() {
+
+                $("#Password").click(function () {
+
+                    var id = $('#Id').val();
+
+                    var json = { id: id };
+                    $.ajax({
+                        type: "POST",
+                        url: '@Url.Action("PasswordReset", "User")',
+                        contentType: "application/json; charset=utf-8",
+                        data: JSON.stringify(json),
+                        
+                        success: function (data) {
+                            console.log(data);
+                            if (data === "Reset Successfull") {
+                                $("#Password").removeClass("btn-info");
+                                $("#Password").addClass("btn-danger");
+                                $("#Password").val("Reset Successfull");
+                            } else {
+                                $("#Password").val("Reset Failed");
+                            }
+
+                        }
+                    });
+                });
+            });
+        </script>
+
+
+
+
+
+
+
     }
 
 

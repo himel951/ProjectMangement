@@ -89,5 +89,13 @@ namespace ProjectManagementWebApp.Controllers
         }
 
 
+        public JsonResult PasswordReset(int id)
+        {
+            string message = _userInfoManger.PasswordReset(id);
+            return Json(message);
+        }
+
+
+
     }
 }

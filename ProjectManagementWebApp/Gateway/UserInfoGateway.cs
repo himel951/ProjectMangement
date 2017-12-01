@@ -160,5 +160,17 @@ namespace ProjectManagementWebApp.Gateway
             return rowAffect;
         }
 
+        public int PasswordReset(int id)
+        {
+            string query = "update UserInfo set Password = Email+'123' where Id=@id";
+            Command = new SqlCommand(query,Connection);
+            Command.Parameters.AddWithValue("@id", id);
+            Connection.Open();
+            int rowAffect = Command.ExecuteNonQuery();
+            Connection.Close();
+            return rowAffect;
+
+        }
+
     }
 }
