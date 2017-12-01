@@ -2,6 +2,7 @@
 @{
     ViewBag.Title = "WelcomIndex";
     List<UserInfoViewModel> userInfoList = (List<UserInfoViewModel>)Session["UserSession"];
+    
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -41,21 +42,21 @@
                             @foreach (UserInfoViewModel userInfoViewModel in userInfoList)
                             {
                                 <li>
-                                    <a href="@userInfoViewModel.MenuPath">@userInfoViewModel.MenuCaption</a>                                   
+                                    <a href="@userInfoViewModel.MenuPath">@userInfoViewModel.MenuCaption</a>
                                 </li>
                             }
 
                             @*<li>
-                                <a href="">New Product</a>
-                                @Html.ActionLink("New Product", "Index", "Product")
-                            </li>*@
-                   
+                                    <a href="">New Product</a>
+                                    @Html.ActionLink("New Product", "Index", "Product")
+                                </li>*@
+
                         </ul>
                     </li>
-             
 
 
-                   
+
+
                 </ul>
             </div>
             <!-- Side Menu End-->
@@ -77,9 +78,12 @@
                             <input type="text" class="hidden-sm hidden-xs" id="header-search-field" placeholder="" />
                         </div>
                         <div class="col-md-7">
-                            <ul class="pull-right">                         
+                            <ul class="pull-right">
+                                <li >
+                                    <span>@userInfoList[0].DesignationName</span>
+                                </li>
                                 <li>
-                                    <a href="#" class="logout">
+                                    <a href="/Home/Index" class="logout">
                                         <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
                                         Log Out
                                     </a>
@@ -122,7 +126,7 @@
 
 
     @*<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>*@
-    
+
 
 </body>
 </html>

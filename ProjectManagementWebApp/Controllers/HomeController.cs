@@ -30,6 +30,7 @@ namespace ProjectManagementWebApp.Controllers
         [HttpPost]
         public ActionResult Index(UserInfo userInfo)
         {
+            
             if (userInfo.Email == null || userInfo.Password == null)
             {
                 ViewBag.Message = "Please Input Username And Password Correctly";

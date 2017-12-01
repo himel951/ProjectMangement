@@ -13,7 +13,7 @@ namespace ProjectManagementWebApp.Models
         public string Password { get; set; }
         public int IsActive { get; set; }
         public int DesignationId { get; set; }
-        public int DesignationName { get; set; }
+        public string DesignationName { get; set; }
         public int MenuPermissionId { get; set; }
         public string MenuPath { get; set; }
         public string MenuCaption { get; set; }

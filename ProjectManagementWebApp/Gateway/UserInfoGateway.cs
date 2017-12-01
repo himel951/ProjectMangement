@@ -78,6 +78,7 @@ namespace ProjectManagementWebApp.Gateway
                     Password = Reader["Password"].ToString(),
                     IsActive = Convert.ToInt32(Reader["IsActive"]),
                     DesignationId = Convert.ToInt32(Reader["DesignationId"]),
+                    DesignationName = Reader["DesignationName"].ToString(),
                     MenuPermissionId = Convert.ToInt32(Reader["MenuPermissionId"]),
                     MenuPath = Reader["MenuPath"].ToString(),
                     MenuCaption = Reader["MenuCaption"].ToString(),
