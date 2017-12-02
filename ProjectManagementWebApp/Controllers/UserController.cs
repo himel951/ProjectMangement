@@ -5,9 +5,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using ProjectManagementWebApp.CustomAttribute;
 
 namespace ProjectManagementWebApp.Controllers
 {
+    [NoCache]
     public class UserController : Controller
     {
         // GET: User
@@ -23,12 +25,18 @@ namespace ProjectManagementWebApp.Controllers
         [HttpGet]
         public ActionResult Index()
         {
+            if (Session["UserSession"] != null)
+            {
+                ViewBag.Designations = _designationManager.GetAllDesignationAsListItem();
+                ViewBag.IsActive = _designationManager.GetIsActiveListItem();
 
-            ViewBag.Designations = _designationManager.GetAllDesignationAsListItem();
-            ViewBag.IsActive = _designationManager.GetIsActiveListItem();
-            
-            return View();
-
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Logout", "Home");
+            }
+                      
         }
 
 
@@ -57,18 +65,38 @@ namespace ProjectManagementWebApp.Controllers
 
         public ActionResult EditView()
         {
-            List<UserInfoDesignationViewModel> userList = _userInfoManger.GetAllUser();
-            return View(userList);
+            if (Session["UserSession"] != null)
+            {
+                List<UserInfoDesignationViewModel> userList = _userInfoManger.GetAllUser();
+                return View(userList);              
+            }
+            else
+            {
+                return RedirectToAction("Logout", "Home", new { message = "You have already logged out. Please login again" });
+            }
+           
         }
 
 
         [HttpGet]
         public ActionResult Update(int id)
         {
-            ViewBag.Designation = _designationManager.GetAllDesignationAsListItem();
-            ViewBag.IsActives = _designationManager.GetIsActiveListItem();
-            UserInfoDesignationViewModel userInfoDesignationViewModel = _userInfoManger.GetUserById(id);
-            return View(userInfoDesignationViewModel);
+
+            if (Session["UserSession"] != null)
+            {
+                ViewBag.Designation = _designationManager.GetAllDesignationAsListItem();
+                ViewBag.IsActives = _designationManager.GetIsActiveListItem();
+                UserInfoDesignationViewModel userInfoDesignationViewModel = _userInfoManger.GetUserById(id);
+                return View(userInfoDesignationViewModel);
+            }
+            else
+            {
+                return RedirectToAction("Logout", "Home", new { message = "You have already logged out. Please login again" });
+            }
+
+
+
+            
         }
 
         [HttpPost]

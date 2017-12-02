@@ -5,9 +5,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using ProjectManagementWebApp.CustomAttribute;
 
 namespace ProjectManagementWebApp.Controllers
 {
+    [NoCache]
     public class HomeController : Controller
     {
         private UserInfoManager _userInfoManger;
@@ -18,7 +20,7 @@ namespace ProjectManagementWebApp.Controllers
         }
 
 
-
+        
         [HttpGet]
         public ActionResult Index()
         {
@@ -27,6 +29,8 @@ namespace ProjectManagementWebApp.Controllers
             return View();
         }
 
+
+        
         [HttpPost]
         public ActionResult Index(UserInfo userInfo)
         {
@@ -59,11 +63,17 @@ namespace ProjectManagementWebApp.Controllers
             }
             else
             {
-                return RedirectToAction("Index");
+                return RedirectToAction("Logout",new { message = "You have already logged out. Please login again" });
             }
 
         }
 
+        public ActionResult Logout(string message)
+        {
+            Session["UserSession"] = null;
+            ViewBag.Message = message;            
+            return View("Index");
+        }
 
     }
 }

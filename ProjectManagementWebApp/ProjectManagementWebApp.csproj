@@ -142,8 +142,11 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ProjectController.cs" />
     <Compile Include="Controllers\UnderConstructionController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="CustomAttribute\CacheControlAttribute.cs" />
+    <Compile Include="CustomAttribute\NoCacheAttribute.cs" />
     <Compile Include="Gateway\BaseGateway.cs" />
     <Compile Include="Gateway\DesignationGateway.cs" />
     <Compile Include="Gateway\UserInfoGateway.cs" />
@@ -153,12 +156,16 @@
     <Compile Include="Manager\DesignationManager.cs" />
     <Compile Include="Manager\UserInfoManager.cs" />
     <Compile Include="Models\Designation.cs" />
+    <Compile Include="Models\Project.cs" />
+    <Compile Include="Models\ProjectViewModel.cs" />
+    <Compile Include="Models\Resource.cs" />
     <Compile Include="Models\UserInfo.cs" />
     <Compile Include="Models\UserInfoDesignationViewModel.cs" />
     <Compile Include="Models\UserInfoViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap-datepicker.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\default.css" />
@@ -168,6 +175,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Scripts\bootstrap-datepicker.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
@@ -201,6 +209,7 @@
     <Content Include="Views\User\EditView.cshtml" />
     <Content Include="Views\User\Update.cshtml" />
     <Content Include="Views\UnderConstruction\Index.cshtml" />
+    <Content Include="Views\Project\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

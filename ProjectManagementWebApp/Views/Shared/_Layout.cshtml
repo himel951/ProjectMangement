@@ -35,7 +35,7 @@
                         <a href="#collapse-product" data-toggle="collapse" aria-controls="collapse-product">
                             <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
                             <span class="hidden-sm hidden-xs">Project Management Module</span>
-                            @* <span class="label label-success pull-right hidden-sm hidden-xs" aria-hidden="true">10</span>*@
+                          
                         </a>
 
                         <ul class="collapse collapsible" id="collapse-product">
@@ -45,18 +45,8 @@
                                     <a href="@userInfoViewModel.MenuPath">@userInfoViewModel.MenuCaption</a>
                                 </li>
                             }
-
-                            @*<li>
-                                    <a href="">New Product</a>
-                                    @Html.ActionLink("New Product", "Index", "Product")
-                                </li>*@
-
                         </ul>
                     </li>
-
-
-
-
                 </ul>
             </div>
             <!-- Side Menu End-->
@@ -83,10 +73,13 @@
                                     <span>@userInfoList[0].DesignationName</span>
                                 </li>
                                 <li>
-                                    <a href="/Home/Index" class="logout">
+                                    <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
+                                    @Html.ActionLink("Logout", "Logout", "Home", new { message = "Logout Successful" }, new { @class = "logoutt"})
+
+                                    @*<a href="/Home/Logout" class="logout">
                                         <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
                                         Log Out
-                                    </a>
+                                    </a>*@
                                 </li>
                             </ul>
                         </div>
@@ -96,7 +89,6 @@
                 <!--Inner Content Start-->
                 <div class="row">
                     @RenderBody()
-
                 </div>
 
                 <!--Inner Content End-->

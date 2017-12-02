@@ -1,0 +1,173 @@
+﻿@using ProjectManagementWebApp.Models
+@model ProjectViewModel
+@{
+    ViewBag.Title = "Index";
+}
+@section Style
+{
+    <link href="~/Content/product-section-style.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-datepicker.css" rel="stylesheet" />
+}
+<div>
+    @using (Html.BeginForm(null, null, FormMethod.Post, new { @class = "product-content block-center" }))
+    {
+        <h4 class="text-center">Add Project</h4>
+        if (ViewBag.Message != null)
+        {
+            <p class="text-danger">@ViewBag.Message</p>
+        }
+        <div class="form-group-sm">
+            @Html.LabelFor(m => m.Name)
+            @Html.TextBoxFor(m => m.Name, new { @class = "form-control", @placeholder = "Name" })
+            @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group-sm">
+            @Html.LabelFor(m => m.CodeName)
+            @Html.TextBoxFor(m => m.CodeName, new { @class = "form-control", @placeholder = "Code Name" })
+            @Html.ValidationMessageFor(m => m.CodeName, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group-sm">
+            @Html.LabelFor(m => m.Description)
+            @Html.TextAreaFor(m => m.Description, new { @class = "form-control", @placeholder = "Description" })
+            @Html.ValidationMessageFor(m => m.Description, "", new { @class = "text-danger" })
+        </div>
+
+
+        <div class="form-group-sm">
+            @Html.LabelFor(m => m.StartDate)
+            @Html.TextBoxFor(m => m.StartDate, new { @class = "form-control", @placeholder = "Start Date" })
+            @Html.ValidationMessageFor(m => m.StartDate, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group-sm">
+            @Html.LabelFor(m => m.EndDate)
+            @Html.TextBoxFor(m => m.EndDate, new { @class = "form-control", @placeholder = "End Date" })
+            @Html.ValidationMessageFor(m => m.EndDate, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group-sm">
+            @Html.Label("Duration(In Days)")
+            @Html.TextBox("Duration", null, new { @class = "form-control", @placeholder = "Duration in days" })
+        </div>
+
+        <div class="form-group-sm">
+            @Html.LabelFor(m => m.Resource)
+            @Html.TextBoxFor(m => m.Resource, new { @class = "form-control", @placeholder = "End Date", @type = "file" })
+            @Html.ValidationMessageFor(m => m.Resource, "", new { @class = "text-danger" })
+        </div>
+
+
+        <div class="form-group-sm">
+            <label></label>
+            <button id="SubmitForm" name="SubmitForm" type="submit" class="btn btn-info form-control">Add</button>
+        </div>
+
+    }
+
+
+
+    @section scripts
+    {
+        @Scripts.Render("~/bundles/jqueryval");
+        <script src="~/Scripts/bootstrap-datepicker.js"></script>
+        <script>
+
+            function isLastDateGreaterThanFirstDate(firstDate, secondDate) {
+                var from = firstDate.split("-");;
+                var to = secondDate.split("-");;
+                var startDate = new Date(from[2], from[1] - 1, from[0]);
+                var endDate = new Date(to[2], to[1] - 1, to[0]);
+
+                if (startDate < endDate) {
+                    return 1;
+                } else {
+                    return 0;
+                }
+            }
+
+            $(document).ready(function() {
+
+                $('#StartDate')
+                    .datepicker({
+                        weekStart: 6,
+                        autoclose: true,
+                        todayHighlight: true,
+                        format: "dd-mm-yy"
+                    });
+                $('#EndDate')
+                    .datepicker({
+                        weekStart: 6,
+                        autoclose: true,
+                        todayHighlight: true,
+                        format: "dd-mm-yy"
+                    });
+            });
+
+            $(document).ready(function() {
+
+                $("#SubmitForm").click(function(evt) {
+                    var a = $("#StartDate").val();
+                    var b = $("#EndDate").val();
+                    var value = isLastDateGreaterThanFirstDate(a, b);
+                    if (value === 0) {
+                        alert("End date should greater than the start date");
+                        evt.preventDefault();
+                        window.history.back();
+                    }
+                });
+
+            });
+
+
+            $(document).ready(function() {
+
+                $("#StartDate").change(function() {
+
+                    var a = $("#StartDate").val();
+                    var b = $("#EndDate").val();
+                    var value = isLastDateGreaterThanFirstDate(a, b);
+                    if (value === 1) {
+                        var days = calculateDays(a, b);
+                        $("#Duration").val(days);
+                    } else {
+                        $("#Duration").val("");
+                        
+                    }
+
+                });
+
+                $("#EndDate").change(function() {
+
+                    var a = $("#StartDate").val();
+                    var b = $("#EndDate").val();
+                    console.log(a);
+                    console.log(b);
+                    var value = isLastDateGreaterThanFirstDate(a, b);
+                    if (value === 1) {
+                        var days = calculateDays(a, b);
+                        $("#Duration").val(days);
+                    } else {
+                        $("#Duration").val("");                       
+                    }
+                });
+
+                function calculateDays(startDatee, endDatee) {
+                    var oneDay = 24 * 60 * 60 * 1000; 
+                    var from = startDatee.split("-");
+                    var to = endDatee.split("-");
+
+                    var startDate = new Date(from[2], from[1] - 1, from[0]);
+                    var endDate = new Date(to[2], to[1] - 1, to[0]);
+
+                    var diffDays = Math.round(Math.abs((startDate.getTime() - endDate.getTime()) / (oneDay)));
+                    return diffDays;
+                }
+
+
+            });
+
+        </script>
+    }
+
+
+</div>
