@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using ProjectManagementWebApp.SecurityNC;
 
 namespace ProjectManagementWebApp.Manager
 {
@@ -17,11 +18,14 @@ namespace ProjectManagementWebApp.Manager
 
         public bool IsUserNameAndPasswordValid(string userName, string password)
         {
+
+            password = NCSecurity.EncryptValue(password);
             return _userInfoGateway.IsUserNameAndPasswordValid(userName, password);
         }
 
         public List<UserInfoViewModel> GetUserMenu(string email, string password)
         {
+            password = NCSecurity.EncryptValue(password);
             _userInfoGateway = new UserInfoGateway();
             List<UserInfoViewModel> userInfoViewModelList = _userInfoGateway.GetUserMenu(email,password);
             return userInfoViewModelList;
@@ -29,10 +33,14 @@ namespace ProjectManagementWebApp.Manager
 
         public string Save(UserInfo userInfo)
         {
+            
+            userInfo.Password = NCSecurity.EncryptValue(userInfo.Password);
+
             if (_userInfoGateway.IsEmailExists(userInfo.Email))
             {
                 return "Email Already Exists";
             }
+
             int rowAffect = _userInfoGateway.Save(userInfo);
 
             return rowAffect > 0 ? "Save Successfull" : "Save Failed";

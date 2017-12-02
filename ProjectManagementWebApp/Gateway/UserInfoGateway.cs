@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using Microsoft.Ajax.Utilities;
+using ProjectManagementWebApp.SecurityNC;
 
 namespace ProjectManagementWebApp.Gateway
 {
@@ -162,9 +163,13 @@ namespace ProjectManagementWebApp.Gateway
 
         public int PasswordReset(int id)
         {
-            string query = "update UserInfo set Password = Email+'123' where Id=@id";
+            string email = GetUserById(id).Email;
+            string encryptPassword = NCSecurity.EncryptValue(email + "123");
+            string decvalue = NCSecurity.DecryptValue(encryptPassword);
+            string query = "update UserInfo set Password =@passowrd where Id=@id";
             Command = new SqlCommand(query,Connection);
             Command.Parameters.AddWithValue("@id", id);
+            Command.Parameters.AddWithValue("@passowrd", encryptPassword);
             Connection.Open();
             int rowAffect = Command.ExecuteNonQuery();
             Connection.Close();

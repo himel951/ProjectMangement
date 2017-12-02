@@ -163,6 +163,7 @@
     <Compile Include="Models\UserInfoDesignationViewModel.cs" />
     <Compile Include="Models\UserInfoViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SecurityNC\NCSecurity.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-datepicker.css" />
